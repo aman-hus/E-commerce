@@ -1,13 +1,15 @@
 // MyComponent.jsx
 
-import React,{useState} from 'react'; // Optional in React 17+ with JSX Transform
+import React,{useContext,useState} from 'react'; // Optional in React 17+ with JSX Transform
 import './Navbar.css'
 import logo from '../assets/logo.png'
 import cart_icon from '../assets/cart_icon.png'
 import {Link} from 'react-router-dom';
+import { ShopContext } from '../../context/ShopContext';
 // import { href } from 'react-router-dom';
 const Navbar = () => {
     const [menu,setMenu]= useState("Shop");
+    const {getTotalCartItems}=useContext(ShopContext);
   return (
     <div className='navbar'>       <div className="nav-logo">
         <img src={logo} alt="" />
@@ -22,7 +24,7 @@ const Navbar = () => {
       <div className="nav-login-cart">
       <Link to='/login'><button>login</button></Link>
        <Link to='cart'><img src={cart_icon} alt="" /></Link>
-        <div className="nav-cart-count">0</div>
+        <div className="nav-cart-count">{getTotalCartItems()}</div>
       </div>
     </div>
   );
